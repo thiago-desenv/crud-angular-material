@@ -8,7 +8,7 @@ export class cliente {
   email?: string;
 
   static newCliente() {
-    let novoCliente = new cliente();
+    const novoCliente = new cliente();
     novoCliente.id = uuid();
     return novoCliente;
   }

@@ -1,6 +1,6 @@
 <div fxLayout="row" fxLayoutAlign="center">
   <div fxLayout="column" fxFlex="500px">
-    <form class="mt-60" #clientesFrm="ngForm">
+    <form class="mt-60" #clientesFrm="ngForm" (ngSubmit)="salvar()">
       <mat-card>
         <mat-card-header>
           <mat-card-title>Dados pessoais</mat-card-title>
@@ -10,7 +10,7 @@
             <div fxLayout="column" fxFlex="400px">
               <mat-form-field class="full-width">
                 <mat-label>Nome: *</mat-label>
-                <input type="text" placeholder="Ex: José da Silva" matInput />
+                <input type="text" name="nome" placeholder="Ex: José da Silva" [(ngModel)]="cliente.nome" matInput />
               </mat-form-field>
             </div>
           </div>
@@ -18,7 +18,7 @@
             <div fxLayout="column" fxFlex="400px">
               <mat-form-field class="full-width">
                 <mat-label>E-mail: *</mat-label>
-                <input type="email" placeholder="Digite seu e-mail" matInput/>
+                <input type="email" name="email" placeholder="Digite seu e-mail" [(ngModel)]="cliente.email" matInput/>
               </mat-form-field>
             </div>
           </div>
@@ -26,7 +26,7 @@
             <div fxLayout="column" fxFlex="300px">
               <mat-form-field class="full-width">
                 <mat-label>CPF: *</mat-label>
-                <input type="text" placeholder="Digite seu CPF" matInput/>
+                <input type="text" name="cpf" placeholder="Digite seu CPF" [(ngModel)]="cliente.cpf" matInput/>
               </mat-form-field>
             </div>
           </div>
@@ -34,13 +34,13 @@
             <div fxLayout="column" fxFlex="300px">
               <mat-form-field class="full-width">
                 <mat-label>Data nascimnto: *</mat-label>
-                <input type="date" placeholder="Digite sua data de nascimento" matInput/>
+                <input type="date" name="dataNascimento" placeholder="Digite sua data de nascimento" [(ngModel)]="cliente.dataNascimento" matInput/>
               </mat-form-field>
             </div>
           </div>
         </mat-card-content>
         <mat-card-actions>
-          <button mat-flat-button color="primary">
+          <button mat-flat-button color="primary" type="submit">
             <mat-icon fontIcon="save"></mat-icon>
             Salvar
           </button>
