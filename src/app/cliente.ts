@@ -7,7 +7,20 @@ import { Injectable } from '@angular/core';
 export class ClienteService {
   constructor() { }
 
-    salvar(cliente: cliente) {
+  static REPO_CLIENTES = "_CLIENTES";
+
+  salvar(cliente: cliente) {
     console.log("Dados cliente: ", cliente);
+  }
+
+  obterDadosClientesStorage(): cliente[] {
+    const repositorioClientes = localStorage.getItem(ClienteService.REPO_CLIENTES);
+    if(repositorioClientes) {
+      const clientes: cliente[] = JSON.parse(repositorioClientes);
+      return clientes;
+    }
+    const clientes: cliente[] = [];
+    localStorage.setItem(ClienteService.REPO_CLIENTES, JSON.stringify(clientes));
+    return clientes;
   }
 }
