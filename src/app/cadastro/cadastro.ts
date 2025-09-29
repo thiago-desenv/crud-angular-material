@@ -29,6 +29,7 @@ export class Cadastro {
   cliente: cliente = cliente.newCliente();
 
   salvar() {
+    this.cliente.id = cliente.newId();
     this.service.salvar(this.cliente);
   }
 }
