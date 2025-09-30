@@ -26,7 +26,7 @@
             <div fxLayout="column" fxFlex="300px">
               <mat-form-field class="full-width">
                 <mat-label>CPF: *</mat-label>
-                <input type="text" name="cpf" placeholder="Digite seu CPF" [(ngModel)]="cliente.cpf" matInput/>
+                <input type="text" name="cpf" mask="000.000.000-00" placeholder="Digite seu CPF" [(ngModel)]="cliente.cpf" matInput/>
               </mat-form-field>
             </div>
           </div>
