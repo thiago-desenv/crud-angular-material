@@ -13,8 +13,4 @@ export class cliente {
     novoCliente.id = uuid();
     return novoCliente;
   }
-
-  static newId() {
-    return uuid();
-  }
 }

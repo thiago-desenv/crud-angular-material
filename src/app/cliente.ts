@@ -1,5 +1,6 @@
 import { cliente } from './cadastro/cliente';
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: 'root'
@@ -8,6 +9,7 @@ export class ClienteService {
   constructor() { }
 
   static REPO_CLIENTES = "_CLIENTES";
+  private _snackBar = inject(MatSnackBar)
 
   salvar(cliente: cliente) {
     const storage = this.obterDadosClientesStorage();
@@ -60,5 +62,9 @@ export class ClienteService {
     const clientes: cliente[] = [];
     localStorage.setItem(ClienteService.REPO_CLIENTES, JSON.stringify(clientes));
     return clientes;
+  }
+
+  mensagemSucesso(message: string) {
+    this._snackBar.open(message, "Ok");
   }
 }

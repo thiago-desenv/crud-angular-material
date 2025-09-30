@@ -52,5 +52,6 @@ export class Consulta implements OnInit {
   confirmarDelecao(cliente: cliente) {
     this.service.deletar(cliente);
     this.listaClientes = this.service.pesquisarClientes('');
+    this.service.mensagemSucesso("Deletado com sucesso!");
   }
 }
