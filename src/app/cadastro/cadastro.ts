@@ -10,6 +10,8 @@ import { cliente } from './cliente';
 import { ClienteService } from '../cliente';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
+import { EnderecoApi } from '../endereco-api';
+import { Estado, Municipio } from '../endereco-api.models';
 
 @Component({
   selector: 'app-cadastro',
@@ -29,7 +31,12 @@ import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
   styleUrl: './cadastro.scss'
 })
 export class Cadastro implements OnInit {
-  constructor(private service: ClienteService, private route: ActivatedRoute, private router: Router) { }
+  constructor(
+    private enderecoApi: EnderecoApi,
+    private service: ClienteService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) { }
 
   ngOnInit() {
     this.route.queryParamMap.subscribe((q: any) => {
@@ -43,10 +50,14 @@ export class Cadastro implements OnInit {
         }
       }
     })
+
+    this.getUfs();
   }
 
   cliente: cliente = cliente.newCliente();
   atualizar : boolean = false;
+  estados: Estado[] = [];
+  municipio: Municipio[] = [];
 
   salvar() {
     if(!this.atualizar) {
@@ -58,5 +69,12 @@ export class Cadastro implements OnInit {
       this.router.navigate(['/consulta']);
       this.service.mensagemSucesso("Atualizado com sucesso!")
     }
+  }
+
+  getUfs() {
+    this.enderecoApi.getUfs().subscribe({
+      next: listaEstados => this.estados = listaEstados,
+      error: erro => console.log('Ocorreu um erro na chamada da Api de endereçco: ', erro)
+    });
   }
 }
