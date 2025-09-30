@@ -67,8 +67,8 @@
                 Editar
               </button>
 
-              @if(!botaoDeletar) {
-                <button type="button" mat-button (click)="deletar()">
+              @if(!cliente.deletar) {
+                <button type="button" mat-button (click)="deletar(cliente)">
                   <mat-icon fontIcon="delete"></mat-icon>
                   Deletar
                 </button>
