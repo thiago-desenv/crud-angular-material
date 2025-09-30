@@ -29,7 +29,8 @@ import { Router } from '@angular/router';
 export class Consulta implements OnInit {
   nomeBusca: string = '';
   listaClientes: cliente[] = [];
-  columnsTable: string[] = ["id", "nome", "cpf", "dataNascimento", "email", "acoes"]
+  columnsTable: string[] = ["id", "nome", "cpf", "dataNascimento", "email", "acoes"];
+  botaoDeletar: boolean = false;
 
   constructor(private service: ClienteService, private router: Router) {}
 
@@ -43,5 +44,15 @@ export class Consulta implements OnInit {
 
   editar(id: string) {
     this.router.navigate(['/cadastro'], { queryParams: { "id": id } })
+  }
+
+  deletar() {
+    this.botaoDeletar = true;
+  }
+
+  confirmarDelecao(cliente: cliente) {
+    this.service.deletar(cliente);
+    this.listaClientes = this.service.pesquisarClientes('');
+    this.botaoDeletar = false;
   }
 }
