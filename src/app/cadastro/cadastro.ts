@@ -6,12 +6,14 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { MatSelectModule } from '@angular/material/select';
 import { cliente } from './cliente';
 import { ClienteService } from '../cliente';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { EnderecoApi } from '../endereco-api';
 import { Estado, Municipio } from '../endereco-api.models';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-cadastro',
@@ -23,8 +25,10 @@ import { Estado, Municipio } from '../endereco-api.models';
     FormsModule,
     MatIconModule,
     MatButtonModule,
-    NgxMaskDirective
-  ], providers: [
+    MatSelectModule,
+    NgxMaskDirective,
+    CommonModule
+], providers: [
     provideNgxMask()
   ],
   templateUrl: './cadastro.html',
