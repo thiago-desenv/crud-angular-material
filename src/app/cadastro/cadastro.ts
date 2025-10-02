@@ -6,7 +6,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { MatSelectModule } from '@angular/material/select';
+import { MatSelectChange, MatSelectModule } from '@angular/material/select';
 import { cliente } from './cliente';
 import { ClienteService } from '../cliente';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -51,6 +51,10 @@ export class Cadastro implements OnInit {
         if(clienteEncontrado) {
           this.atualizar = true;
           this.cliente = clienteEncontrado;
+          if(this.cliente.uf) {
+            const event = { value: this.cliente.uf };
+            this.getMunicipios(event as MatSelectChange);
+          }
         }
       }
     })
@@ -61,7 +65,7 @@ export class Cadastro implements OnInit {
   cliente: cliente = cliente.newCliente();
   atualizar : boolean = false;
   estados: Estado[] = [];
-  municipio: Municipio[] = [];
+  municipios: Municipio[] = [];
 
   salvar() {
     if(!this.atualizar) {
@@ -78,7 +82,15 @@ export class Cadastro implements OnInit {
   getUfs() {
     this.enderecoApi.getUfs().subscribe({
       next: listaEstados => this.estados = listaEstados,
-      error: erro => console.log('Ocorreu um erro na chamada da Api de endereçco: ', erro)
+      error: erro => console.log('Ocorreu um erro na chamada obter UF da Api de endereço: ', erro)
+    });
+  }
+
+  getMunicipios(event: MatSelectChange) {
+    const ufSelecionada = event.value;
+    this.enderecoApi.getMunicipio(ufSelecionada).subscribe({
+      next: listaMunicipios => this.municipios = listaMunicipios,
+      error: erro => console.log('Ocorreu um erro na chamada obter Município da Api de endereço: ', erro)
     });
   }
 }
